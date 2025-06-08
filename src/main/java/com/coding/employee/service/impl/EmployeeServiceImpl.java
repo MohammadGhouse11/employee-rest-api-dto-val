@@ -1,6 +1,8 @@
 package com.coding.employee.service.impl;
 
 import com.coding.employee.entity.Employee;
+import com.coding.employee.exception.BadRequestException;
+import com.coding.employee.exception.ResourceNotFoundException;
 import com.coding.employee.repository.EmployeeRepository;
 import com.coding.employee.service.EmployeeService;
 import org.springframework.stereotype.Service;
@@ -17,13 +19,16 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee createEmployee(Employee employee) {
+        if(employee.getName() == null || employee.getName().trim().isEmpty()) {
+            throw new BadRequestException("Employee name cannot be empty");
+        }
         return employeeRepository.save(employee);
     }
 
     @Override
     public Employee getEmployeeById(Long id) {
         return employeeRepository.findById(id)
-                .orElse(null);
+                .orElseThrow(()-> new RuntimeException("Employee with id Not Found: "+id));
     }
 
     @Override
@@ -33,7 +38,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee updateEmployee(Long id, Employee updatedEmployee) {
-        Employee existingEmp = employeeRepository.findById(id).orElse(null);
+        Employee existingEmp = employeeRepository.findById(id)
+                        .orElseThrow(()-> new ResourceNotFoundException("Employee with id Not Found: "+id));
         existingEmp.setName(updatedEmployee.getName());
         existingEmp.setEmail(updatedEmployee.getEmail());
         existingEmp.setDepartment(updatedEmployee.getDepartment());
@@ -42,7 +48,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee partialUpdateEmployee(Long id, Employee partialUpdateEmp) {
-        Employee existingEmp = employeeRepository.findById(id).orElse(null);
+        Employee existingEmp = employeeRepository.findById(id)
+                .orElseThrow(()-> new RuntimeException("Employee with id Not Found: "+id));
         if(partialUpdateEmp.getName()!=null && partialUpdateEmp.getName()!=""){
             existingEmp.setName(partialUpdateEmp.getName());
         }
@@ -57,7 +64,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public void deleteEmployee(Long id) {
-        Employee existingEmp = employeeRepository.findById(id).orElse(null);
+        Employee existingEmp = employeeRepository.findById(id)
+                        .orElseThrow(()-> new ResourceNotFoundException("Employee with id Not Found: "+id));
         employeeRepository.delete(existingEmp);
     }
 }
