@@ -35,7 +35,7 @@ public class Employee {
         this.email = email;
         this.department = department;
         this.salary = salary;
-        Designation = designation;
+        this.designation = designation;
     }
 
     public String getName() {
@@ -71,11 +71,11 @@ public class Employee {
     }
 
     public String getDesignation() {
-        return Designation;
+        return designation;
     }
 
     public void setDesignation(String designation) {
-        Designation = designation;
+        this.designation = designation;
     }
 
     public LocalDateTime getTimeStamp() {
@@ -90,7 +90,7 @@ public class Employee {
                 ", email='" + email + '\'' +
                 ", department='" + department + '\'' +
                 ", salary=" + salary +
-                ", Designation='" + Designation + '\'' +
+                ", Designation='" + designation + '\'' +
                 ", timeStamp=" + timeStamp +
                 '}';
     }
