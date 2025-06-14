@@ -1,5 +1,6 @@
 package com.coding.employee.controller;
 
+import com.coding.employee.dto.EmployeeDTO;
 import com.coding.employee.entity.Employee;
 import com.coding.employee.service.EmployeeService;
 import org.springframework.http.HttpStatus;
@@ -19,24 +20,24 @@ public class EmployeeController {
     }
 
     @PostMapping
-    public ResponseEntity<Employee> createEmployee(@RequestBody Employee employee){
-        Employee savedEmp = employeeService.createEmployee(employee);
+    public ResponseEntity<EmployeeDTO> createEmployee(@RequestBody EmployeeDTO employeeDTO){
+        EmployeeDTO savedEmp = employeeService.createEmployee(employeeDTO);
         return new ResponseEntity<>(savedEmp, HttpStatus.CREATED);
     }
 
     @GetMapping(value="/{id}")
-    public ResponseEntity<Employee> getEmployeeById(@PathVariable("id") Long id){
+    public ResponseEntity<EmployeeDTO> getEmployeeById(@PathVariable("id") Long id){
         return ResponseEntity.ok(employeeService.getEmployeeById(id));
     }
 
     @GetMapping
-    public ResponseEntity<List<Employee>> getAllEmployees(){
+    public ResponseEntity<List<EmployeeDTO>> getAllEmployees(){
         return ResponseEntity.ok(employeeService.getAllEmployees());
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Employee> updateEmployee(@PathVariable("id") Long id,@RequestBody Employee employee){
-        return ResponseEntity.ok(employeeService.updateEmployee(id,employee));
+    public ResponseEntity<EmployeeDTO> updateEmployee(@PathVariable("id") Long id,@RequestBody EmployeeDTO employeeDTO){
+        return ResponseEntity.ok(employeeService.updateEmployee(id,employeeDTO));
     }
 
     @DeleteMapping(value = "/{id}")
@@ -48,8 +49,8 @@ public class EmployeeController {
     }
 
     @PatchMapping(value = "/{id}")
-    public ResponseEntity<Employee> partialUpdateEmp(@PathVariable  Long id,@RequestBody Employee employee){
-        return ResponseEntity.ok(employeeService.partialUpdateEmployee(id,employee));
+    public ResponseEntity<EmployeeDTO> partialUpdateEmp(@PathVariable  Long id,@RequestBody EmployeeDTO employeeDTO){
+        return ResponseEntity.ok(employeeService.partialUpdateEmployee(id,employeeDTO));
     }
 
 }

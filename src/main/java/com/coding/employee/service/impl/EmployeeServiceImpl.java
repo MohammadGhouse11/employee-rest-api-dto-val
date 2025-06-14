@@ -1,8 +1,10 @@
 package com.coding.employee.service.impl;
 
+import com.coding.employee.dto.EmployeeDTO;
 import com.coding.employee.entity.Employee;
 import com.coding.employee.exception.BadRequestException;
 import com.coding.employee.exception.ResourceNotFoundException;
+import com.coding.employee.mapper.EmployeeMapper;
 import com.coding.employee.repository.EmployeeRepository;
 import com.coding.employee.service.EmployeeService;
 import org.springframework.stereotype.Service;
@@ -18,48 +20,55 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee createEmployee(Employee employee) {
-        if(employee.getName() == null || employee.getName().trim().isEmpty()) {
+    public EmployeeDTO createEmployee(EmployeeDTO employeeDTO) {
+        if(employeeDTO.getName() == null || employeeDTO.getName().trim().isEmpty()) {
             throw new BadRequestException("Employee name cannot be empty");
         }
-        return employeeRepository.save(employee);
+        Employee employee = EmployeeMapper.mapToEntity(employeeDTO);
+        Employee saved = employeeRepository.save(employee);
+        return EmployeeMapper.mapToDTO(saved);
+
     }
 
     @Override
-    public Employee getEmployeeById(Long id) {
-        return employeeRepository.findById(id)
-                .orElseThrow(()-> new RuntimeException("Employee with id Not Found: "+id));
+    public EmployeeDTO getEmployeeById(Long id) {
+        Employee employee = employeeRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Employee with id Not Found: " + id));
+        return EmployeeMapper.mapToDTO(employee);
     }
 
     @Override
-    public List<Employee> getAllEmployees() {
-        return employeeRepository.findAll();
+    public List<EmployeeDTO> getAllEmployees() {
+        List<Employee> all = employeeRepository.findAll();
+        return all.stream().map(EmployeeMapper::mapToDTO).toList();
     }
 
     @Override
-    public Employee updateEmployee(Long id, Employee updatedEmployee) {
+    public EmployeeDTO updateEmployee(Long id, EmployeeDTO updatedEmployeeDTO) {
         Employee existingEmp = employeeRepository.findById(id)
                         .orElseThrow(()-> new ResourceNotFoundException("Employee with id Not Found: "+id));
-        existingEmp.setName(updatedEmployee.getName());
-        existingEmp.setEmail(updatedEmployee.getEmail());
-        existingEmp.setDepartment(updatedEmployee.getDepartment());
-        return employeeRepository.save(existingEmp);
+        existingEmp.setName(updatedEmployeeDTO.getName());
+        existingEmp.setEmail(updatedEmployeeDTO.getEmail());
+        existingEmp.setDepartment(updatedEmployeeDTO.getDepartment());
+        Employee saved = employeeRepository.save(existingEmp);
+        return EmployeeMapper.mapToDTO(saved);
     }
 
     @Override
-    public Employee partialUpdateEmployee(Long id, Employee partialUpdateEmp) {
+    public EmployeeDTO partialUpdateEmployee(Long id, EmployeeDTO partialUpdateEmpDTO) {
         Employee existingEmp = employeeRepository.findById(id)
                 .orElseThrow(()-> new RuntimeException("Employee with id Not Found: "+id));
-        if(partialUpdateEmp.getName()!=null && partialUpdateEmp.getName()!=""){
-            existingEmp.setName(partialUpdateEmp.getName());
+        if(partialUpdateEmpDTO.getName()!=null && partialUpdateEmpDTO.getName()!=""){
+            existingEmp.setName(partialUpdateEmpDTO.getName());
         }
-        if(partialUpdateEmp.getDepartment()!=null && partialUpdateEmp.getDepartment()!=""){
-            existingEmp.setDepartment(partialUpdateEmp.getDepartment());
+        if(partialUpdateEmpDTO.getDepartment()!=null && partialUpdateEmpDTO.getDepartment()!=""){
+            existingEmp.setDepartment(partialUpdateEmpDTO.getDepartment());
         }
-        if(partialUpdateEmp.getEmail()!=null && partialUpdateEmp.getEmail()!=""){
-            existingEmp.setEmail(partialUpdateEmp.getEmail());
+        if(partialUpdateEmpDTO.getEmail()!=null && partialUpdateEmpDTO.getEmail()!=""){
+            existingEmp.setEmail(partialUpdateEmpDTO.getEmail());
         }
-        return employeeRepository.save(existingEmp);
+        Employee saved = employeeRepository.save(existingEmp);
+        return EmployeeMapper.mapToDTO(saved);
     }
 
     @Override
