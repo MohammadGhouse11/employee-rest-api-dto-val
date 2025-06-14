@@ -1,6 +1,9 @@
 package com.coding.employee.entity;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "employees")
@@ -16,6 +19,9 @@ public class Employee {
     private String email;
 
     private String department;
+
+    @CreationTimestamp
+    private LocalDateTime timeStamp;
 
     public Employee() {
     }
@@ -58,6 +64,10 @@ public class Employee {
         this.department = department;
     }
 
+    public LocalDateTime getTimeStamp() {
+        return timeStamp;
+    }
+
     @Override
     public String toString() {
         return "Employee{" +
@@ -65,6 +75,7 @@ public class Employee {
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", department='" + department + '\'' +
+                ", timeStamp=" + timeStamp +
                 '}';
     }
 }
