@@ -13,14 +13,15 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false,name = "EMP_NAME")
     private String name;
-
+    @Column(name = "EMP_EMAIL")
     private String email;
-
+    @Column(name = "DEPARTMENT")
     private String department;
 
     @CreationTimestamp
+    @Column(name = "CREATED_DATE")
     private LocalDateTime timeStamp;
 
     public Employee() {
