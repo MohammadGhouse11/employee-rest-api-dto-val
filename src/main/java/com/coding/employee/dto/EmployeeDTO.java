@@ -5,14 +5,15 @@ public class EmployeeDTO {
     private String name;
     private String email;
     private String department;
-
+    private String designation;
     public EmployeeDTO() {
     }
 
-    public EmployeeDTO(String name, String email, String department) {
+    public EmployeeDTO(String name, String email, String department, String designation) {
         this.name = name;
         this.email = email;
         this.department = department;
+        this.designation = designation;
     }
 
     public String getName() {
@@ -39,12 +40,21 @@ public class EmployeeDTO {
         this.department = department;
     }
 
+    public String getDesignation() {
+        return designation;
+    }
+
+    public void setDesignation(String designation) {
+        this.designation = designation;
+    }
+
     @Override
     public String toString() {
         return "EmployeeDTO{" +
                 "name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", department='" + department + '\'' +
+                ", designation='" + designation + '\'' +
                 '}';
     }
 }

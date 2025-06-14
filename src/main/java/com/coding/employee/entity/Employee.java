@@ -19,7 +19,10 @@ public class Employee {
     private String email;
     @Column(name = "DEPARTMENT")
     private String department;
-
+    @Column(name = "SALARY")
+    private Double salary;
+    @Column(name = "DESIGNATION")
+    private String designation;
     @CreationTimestamp
     @Column(name = "CREATED_DATE")
     private LocalDateTime timeStamp;
@@ -27,18 +30,12 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(String name, String department, String email) {
+    public Employee(String name, String email, String department, Double salary, String designation) {
         this.name = name;
-        this.department = department;
         this.email = email;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+        this.department = department;
+        this.salary = salary;
+        Designation = designation;
     }
 
     public String getName() {
@@ -65,6 +62,22 @@ public class Employee {
         this.department = department;
     }
 
+    public Double getSalary() {
+        return salary;
+    }
+
+    public void setSalary(Double salary) {
+        this.salary = salary;
+    }
+
+    public String getDesignation() {
+        return Designation;
+    }
+
+    public void setDesignation(String designation) {
+        Designation = designation;
+    }
+
     public LocalDateTime getTimeStamp() {
         return timeStamp;
     }
@@ -76,6 +89,8 @@ public class Employee {
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", department='" + department + '\'' +
+                ", salary=" + salary +
+                ", Designation='" + Designation + '\'' +
                 ", timeStamp=" + timeStamp +
                 '}';
     }
