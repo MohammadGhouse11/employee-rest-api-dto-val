@@ -10,7 +10,6 @@ public class EmployeeMapper {
         dto.setEmail(emp.getEmail());
         dto.setDepartment(emp.getDepartment());
         dto.setDesignation(emp.getDesignation());
-        dto.setSalary(emp.getSalary());
         return dto;
     }
 

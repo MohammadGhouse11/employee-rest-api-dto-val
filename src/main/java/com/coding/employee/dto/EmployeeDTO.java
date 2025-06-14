@@ -1,11 +1,14 @@
 package com.coding.employee.dto;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class EmployeeDTO {
     private String name;
     private String email;
     private String department;
     private String designation;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Double salary;
 
     public EmployeeDTO() {
