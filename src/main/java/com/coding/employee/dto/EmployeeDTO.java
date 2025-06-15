@@ -18,6 +18,7 @@ public class EmployeeDTO {
     private String designation;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @PositiveOrZero(message = "Salary should be either positive or zero")
+    @NotBlank(message = "Salary cannot be blank")
     private Double salary;
 
     public EmployeeDTO() {
