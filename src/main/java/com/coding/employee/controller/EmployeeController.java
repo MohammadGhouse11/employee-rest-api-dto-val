@@ -4,14 +4,17 @@ import com.coding.employee.dto.EmployeeDTO;
 import com.coding.employee.entity.Employee;
 import com.coding.employee.service.EmployeeService;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Positive;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping(value= "/api/v1/employees")
+@Validated
 public class EmployeeController {
 
     private EmployeeService employeeService;
@@ -27,8 +30,9 @@ public class EmployeeController {
     }
 
     @GetMapping(value="/{id}")
-    public ResponseEntity<EmployeeDTO> getEmployeeById(@PathVariable("id") Long id){
-        return ResponseEntity.ok(employeeService.getEmployeeById(id));
+    public ResponseEntity<EmployeeDTO> getEmployeeById(@PathVariable("id") @Positive(message = "Id must be a positive number") String id){
+        long id1 = Long.parseLong(id);
+        return ResponseEntity.ok(employeeService.getEmployeeById(id1));
     }
 
     @GetMapping
