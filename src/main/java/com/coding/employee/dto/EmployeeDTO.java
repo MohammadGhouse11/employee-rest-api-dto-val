@@ -2,9 +2,7 @@ package com.coding.employee.dto;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.validation.constraints.*;
 
 public class EmployeeDTO {
     @NotBlank(message = "Name cannot be blank")
@@ -18,7 +16,7 @@ public class EmployeeDTO {
     private String designation;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @PositiveOrZero(message = "Salary should be either positive or zero")
-    @NotBlank(message = "Salary cannot be blank")
+    @NotNull(message = "Salary cannot be null")
     private Double salary;
 
     public EmployeeDTO() {
