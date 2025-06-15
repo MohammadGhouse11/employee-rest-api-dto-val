@@ -49,7 +49,7 @@ public class EmployeeController {
         return new ResponseEntity<>("Employee Deleted with id: "+id,HttpStatus.OK);
     }
     @PatchMapping(value = "/{id}")
-    public ResponseEntity<EmployeeDTO> partialUpdateEmp(@PathVariable  Long id,@RequestBody @Valid EmployeeDTO employeeDTO){
+    public ResponseEntity<EmployeeDTO> partialUpdateEmp(@PathVariable  Long id,@RequestBody  EmployeeDTO employeeDTO){
         return ResponseEntity.ok(employeeService.partialUpdateEmployee(id,employeeDTO));
     }
 
