@@ -21,9 +21,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public EmployeeDTO createEmployee(EmployeeDTO employeeDTO) {
-        if(employeeDTO.getName() == null || employeeDTO.getName().trim().isEmpty()) {
+        /*if(employeeDTO.getName() == null || employeeDTO.getName().trim().isEmpty()) {
             throw new BadRequestException("Employee name cannot be empty");
-        }
+        }*/
         Employee employee = EmployeeMapper.mapToEntity(employeeDTO);
         Employee saved = employeeRepository.save(employee);
         return EmployeeMapper.mapToDTO(saved);
