@@ -3,6 +3,7 @@ package com.coding.employee.controller;
 import com.coding.employee.dto.EmployeeDTO;
 import com.coding.employee.entity.Employee;
 import com.coding.employee.service.EmployeeService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +21,7 @@ public class EmployeeController {
     }
 
     @PostMapping
-    public ResponseEntity<EmployeeDTO> createEmployee(@RequestBody EmployeeDTO employeeDTO){
+    public ResponseEntity<EmployeeDTO> createEmployee(@RequestBody @Valid EmployeeDTO employeeDTO){
         EmployeeDTO savedEmp = employeeService.createEmployee(employeeDTO);
         return new ResponseEntity<>(savedEmp, HttpStatus.CREATED);
     }
@@ -36,7 +37,7 @@ public class EmployeeController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<EmployeeDTO> updateEmployee(@PathVariable("id") Long id,@RequestBody EmployeeDTO employeeDTO){
+    public ResponseEntity<EmployeeDTO> updateEmployee(@PathVariable("id") Long id,@RequestBody @Valid EmployeeDTO employeeDTO){
         return ResponseEntity.ok(employeeService.updateEmployee(id,employeeDTO));
     }
 
@@ -48,7 +49,7 @@ public class EmployeeController {
         return new ResponseEntity<>("Employee Deleted with id: "+id,HttpStatus.OK);
     }
     @PatchMapping(value = "/{id}")
-    public ResponseEntity<EmployeeDTO> partialUpdateEmp(@PathVariable  Long id,@RequestBody EmployeeDTO employeeDTO){
+    public ResponseEntity<EmployeeDTO> partialUpdateEmp(@PathVariable  Long id,@RequestBody @Valid EmployeeDTO employeeDTO){
         return ResponseEntity.ok(employeeService.partialUpdateEmployee(id,employeeDTO));
     }
 
