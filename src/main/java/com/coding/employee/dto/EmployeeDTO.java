@@ -9,7 +9,7 @@ public class EmployeeDTO {
     @NotBlank(message = "Name cannot be blank")
     private String name;
     @NotBlank(message = "Email cannot be blank")
-    @Pattern(regexp = "^[A-Za-z0-9+_%.-]+@[A-Za-z0-9.-]$",
+    @Pattern(regexp = "^[A-Za-z0-9+_.%-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$",
             message = "Email must be in valid format(e.g:user@example.com)")
     private String email;
     @NotBlank(message = "Department cannot be blank")
