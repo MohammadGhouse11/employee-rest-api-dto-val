@@ -30,7 +30,7 @@ public class EmployeeController {
     }
 
     @GetMapping(value="/{id}")
-    public ResponseEntity<EmployeeDTO> getEmployeeById(@PathVariable("id") @Positive(message = "Id must be a positive number") String id){
+    public ResponseEntity<EmployeeDTO> getEmployeeById(@PathVariable("id") @Positive(message = "Id must be a valid positive number") String id){
         long id1 = Long.parseLong(id);
         return ResponseEntity.ok(employeeService.getEmployeeById(id1));
     }
@@ -41,16 +41,18 @@ public class EmployeeController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<EmployeeDTO> updateEmployee(@PathVariable("id") Long id,@RequestBody @Valid EmployeeDTO employeeDTO){
-        return ResponseEntity.ok(employeeService.updateEmployee(id,employeeDTO));
+    public ResponseEntity<EmployeeDTO> updateEmployee(@PathVariable("id") @Positive String id,@RequestBody @Valid EmployeeDTO employeeDTO){
+        long id1 = Long.parseLong(id);
+        return ResponseEntity.ok(employeeService.updateEmployee(id1,employeeDTO));
     }
 
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<String> deleteEmployee(@PathVariable("id") Long id){
-        employeeService.deleteEmployee(id);
+    public ResponseEntity<String> deleteEmployee(@PathVariable("id") @Positive String id){
+        long id1 = Long.parseLong(id);
+        employeeService.deleteEmployee(id1);
         //Ok --> To Return message body
         //No-content --> No message body
-        return new ResponseEntity<>("Employee Deleted with id: "+id,HttpStatus.OK);
+        return new ResponseEntity<>("Employee Deleted with id: "+id1,HttpStatus.OK);
     }
 
     /*
