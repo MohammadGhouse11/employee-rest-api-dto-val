@@ -47,7 +47,6 @@ public class EmployeeController {
         //No-content --> No message body
         return new ResponseEntity<>("Employee Deleted with id: "+id,HttpStatus.OK);
     }
-
     @PatchMapping(value = "/{id}")
     public ResponseEntity<EmployeeDTO> partialUpdateEmp(@PathVariable  Long id,@RequestBody EmployeeDTO employeeDTO){
         return ResponseEntity.ok(employeeService.partialUpdateEmployee(id,employeeDTO));
