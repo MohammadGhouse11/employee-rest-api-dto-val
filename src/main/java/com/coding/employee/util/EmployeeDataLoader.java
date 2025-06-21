@@ -7,9 +7,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
-@Configuration
+//@Configuration
 public class EmployeeDataLoader {
-    @Bean
+    //@Bean
     public CommandLineRunner loadData(EmployeeRepository repository){
         return  args -> {
             repository.save(new Employee("John Doe", "john.doe@example.com", "IT", 55000.0, "Software Engineer"));

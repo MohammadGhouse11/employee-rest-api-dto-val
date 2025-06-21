@@ -1,6 +1,7 @@
 package com.coding.employee.dto;
 
 
+import com.coding.employee.validation.UniqueEmail;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.*;
 
@@ -10,6 +11,7 @@ public class EmployeeDTO {
     @NotBlank(message = "Email cannot be blank")
     @Pattern(regexp = "^[A-Za-z0-9+_.%-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$",
             message = "Email must be in valid format(e.g:user@example.com)")
+   @UniqueEmail
     private String email;
     @NotBlank(message = "Department cannot be blank")
     private String department;
