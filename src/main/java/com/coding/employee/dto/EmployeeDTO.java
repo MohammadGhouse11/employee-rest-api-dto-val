@@ -11,7 +11,7 @@ public class EmployeeDTO {
     @NotBlank(message = "Email cannot be blank")
     @Pattern(regexp = "^[A-Za-z0-9+_.%-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$",
             message = "Email must be in valid format(e.g:user@example.com)")
-   @UniqueEmail
+   @UniqueEmail //custom annotation
     private String email;
     @NotBlank(message = "Department cannot be blank")
     private String department;
