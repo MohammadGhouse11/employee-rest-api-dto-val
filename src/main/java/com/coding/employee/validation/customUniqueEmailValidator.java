@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class customUniqueElementValidator implements ConstraintValidator<UniqueEmail,String> {
+public class customUniqueEmailValidator implements ConstraintValidator<UniqueEmail,String> {
     @Autowired
     private EmployeeRepository employeeRepository;
 

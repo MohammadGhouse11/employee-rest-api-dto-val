@@ -19,4 +19,6 @@ public class EmployeeDataLoader {
             repository.save(new Employee("Mike Johnson", "mike.johnson@example.com", "Marketing", 47000.0, "Marketing Lead"));
         };
     }
+
+
 }
